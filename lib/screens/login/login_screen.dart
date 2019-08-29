@@ -59,6 +59,22 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                     ),
+                    Container(
+                      padding: EdgeInsets.only(top: 160),
+                      child: FlatButton(
+                        child: Container(
+                          child: Text(
+                            "Nao possui uma conta? Cadastre-se!",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              letterSpacing: 0.5,
+                              color: Colors.black,
+                            ),
+                          ),
+                        ),
+                        onPressed: () {},
+                      ),
+                    ),
                   ],
                 ),
               ],
