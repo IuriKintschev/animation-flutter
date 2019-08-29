@@ -7,22 +7,24 @@ class SteggerAnimation extends StatelessWidget {
       : buttonSqueeze = CurvedAnimation(
           parent: controller,
           curve: Curves.bounceOut,
+        ),
+        buttonZoomOut = new Tween(begin: 60.0, end: 1000.0).animate(
+          CurvedAnimation(
+            parent: controller,
+            curve: Interval(
+              0.8,
+              1,
+              curve: Curves.bounceOut,
+            ),
+          ),
         );
-  // : buttonSqueeze = new Tween(
-  //     begin: 320.0,
-  //     end: 60.0,
-  //   ).animate(
-  //     CurvedAnimation(
-  //       parent: controller,
-  //       curve: Interval(0.0, 0.150),
-  //     ),
-  //   );
-  final elasticAnimation = Tween(
+
+  final Animation<double> buttonSqueeze;
+  final buttonSqueezeTime = Tween(
     begin: 320.0,
     end: 60.0,
   );
-
-  final Animation<double> buttonSqueeze;
+  final Animation<double> buttonZoomOut;
 
   Widget _buildAnimation(BuildContext context, Widget child) {
     return Container(
@@ -33,24 +35,32 @@ class SteggerAnimation extends StatelessWidget {
         onTap: () {
           controller.forward();
         },
-        child: Container(
-          width: elasticAnimation.evaluate(buttonSqueeze),
-          height: 60,
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            color: Color.fromRGBO(4, 211, 97, 1.0),
-            borderRadius: BorderRadius.all(
-              Radius.circular(30),
-            ),
-          ),
-          child: _buildInside(context),
-        ),
+        child: buttonZoomOut.value <= 60
+            ? Container(
+                width: buttonSqueezeTime.evaluate(buttonSqueeze),
+                height: 60,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  color: Color.fromRGBO(4, 211, 97, 1.0),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(30),
+                  ),
+                ),
+                child: _buildInside(context),
+              )
+            : Container(
+                width: buttonZoomOut.value,
+                height: buttonZoomOut.value,
+                decoration: BoxDecoration(
+                  color: Color.fromRGBO(4, 211, 97, 1.0),
+                ),
+              ),
       ),
     );
   }
 
   Widget _buildInside(BuildContext context) {
-    if (elasticAnimation.evaluate(buttonSqueeze) > 160) {
+    if (buttonSqueezeTime.evaluate(buttonSqueeze) > 160) {
       return Text(
         "Sing in",
         style: TextStyle(
