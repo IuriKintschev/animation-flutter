@@ -4,9 +4,18 @@ class SteggerAnimation extends StatelessWidget {
   final AnimationController controller;
 
   SteggerAnimation({this.controller})
-      : buttonSqueeze = CurvedAnimation(
-          parent: controller,
-          curve: Curves.bounceOut,
+      : buttonSqueeze = new Tween(
+          begin: 320.0,
+          end: 60.0,
+        ).animate(
+          CurvedAnimation(
+            parent: controller,
+            curve: Interval(
+              0.0,
+              0.4,
+              curve: Curves.bounceOut,
+            ),
+          ),
         ),
         buttonZoomOut = new Tween(begin: 60.0, end: 1000.0).animate(
           CurvedAnimation(
@@ -20,10 +29,6 @@ class SteggerAnimation extends StatelessWidget {
         );
 
   final Animation<double> buttonSqueeze;
-  final buttonSqueezeTime = Tween(
-    begin: 320.0,
-    end: 60.0,
-  );
   final Animation<double> buttonZoomOut;
 
   Widget _buildAnimation(BuildContext context, Widget child) {
@@ -37,7 +42,7 @@ class SteggerAnimation extends StatelessWidget {
         },
         child: buttonZoomOut.value <= 60
             ? Container(
-                width: buttonSqueezeTime.evaluate(buttonSqueeze),
+                width: buttonSqueeze.value,
                 height: 60,
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
@@ -60,7 +65,7 @@ class SteggerAnimation extends StatelessWidget {
   }
 
   Widget _buildInside(BuildContext context) {
-    if (buttonSqueezeTime.evaluate(buttonSqueeze) > 160) {
+    if (buttonSqueeze.value > 160) {
       return Text(
         "Sing in",
         style: TextStyle(
