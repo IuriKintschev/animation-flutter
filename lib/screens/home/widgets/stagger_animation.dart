@@ -13,7 +13,7 @@ class StaggerAnimation extends StatelessWidget {
           curve: Curves.ease,
         );
 
-  _buildAnimation(BuildContext context, Widget child) {
+  Widget _buildAnimation(BuildContext context, Widget child) {
     return ListView(
       padding: EdgeInsets.zero,
       children: <Widget>[

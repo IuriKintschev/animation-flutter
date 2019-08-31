@@ -16,9 +16,11 @@ class _HomeScreenState extends State<HomeScreen>
     _controller = AnimationController(
       vsync: this,
       duration: Duration(
-        seconds: 2,
+        milliseconds: 2000,
       ),
     );
+
+    _controller.forward();
   }
 
   @override
