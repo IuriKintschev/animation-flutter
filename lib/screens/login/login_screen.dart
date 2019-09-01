@@ -1,3 +1,4 @@
+import 'package:animation_for_login_the_list/screens/home/home_screen.dart';
 import 'package:animation_for_login_the_list/screens/login/widgets/stegger_animation.dart';
 import 'package:flutter/material.dart';
 
@@ -18,6 +19,16 @@ class _LoginScreenState extends State<LoginScreen>
       vsync: this,
       duration: Duration(seconds: 2),
     );
+
+    _animationController.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => HomeScreen(),
+          ),
+        );
+      }
+    });
   }
 
   @override

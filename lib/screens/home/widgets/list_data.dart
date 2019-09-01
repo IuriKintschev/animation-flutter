@@ -16,11 +16,11 @@ class ListData extends StatelessWidget {
         color: Colors.white,
         border: Border(
           bottom: BorderSide(
-            color: Colors.grey,
+            color: Colors.grey[100],
             width: 1.0,
           ),
           top: BorderSide(
-            color: Colors.grey,
+            color: Colors.grey[100],
             width: 1.0,
           ),
         ),

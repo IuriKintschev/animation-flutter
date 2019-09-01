@@ -36,11 +36,13 @@ class HomeTop extends StatelessWidget {
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 image: DecorationImage(
-                    image: AssetImage("assets/perfil.jpg"), fit: BoxFit.cover),
+                  image: AssetImage("assets/perfil.jpg"),
+                  fit: BoxFit.cover,
+                ),
               ),
               child: Container(
                 decoration: BoxDecoration(
-                  color: Color(0xff8844dd),
+                  color: Color.fromARGB(255, 4, 211, 97),
                   shape: BoxShape.circle,
                 ),
                 margin: EdgeInsets.only(left: 80),
