@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'animated_list_view.dart';
 import 'home_top.dart';
 
 class StaggerAnimation extends StatelessWidget {
@@ -7,10 +8,25 @@ class StaggerAnimation extends StatelessWidget {
 
   final Animation<double> containerGrow;
 
+  final Animation<EdgeInsets> listSlidePosition;
+
   StaggerAnimation({@required this.controller})
       : containerGrow = CurvedAnimation(
           parent: controller,
           curve: Curves.ease,
+        ),
+        listSlidePosition = EdgeInsetsTween(
+          begin: EdgeInsets.only(top: 0),
+          end: EdgeInsets.only(top: 80),
+        ).animate(
+          CurvedAnimation(
+            parent: controller,
+            curve: Interval(
+              0.325,
+              0.8,
+              curve: Curves.ease,
+            ),
+          ),
         );
 
   Widget _buildAnimation(BuildContext context, Widget child) {
@@ -19,6 +35,9 @@ class StaggerAnimation extends StatelessWidget {
       children: <Widget>[
         HomeTop(
           containerGrow: containerGrow,
+        ),
+        AnimatedListView(
+          listSlidePosition: listSlidePosition,
         ),
       ],
     );
